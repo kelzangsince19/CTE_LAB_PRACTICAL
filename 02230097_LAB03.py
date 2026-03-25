@@ -68,3 +68,82 @@ if __name__ == "__main__":
     stack.pop()
     print("Stack size:", stack.size())
     stack.display()
+
+#Part 2: Stack Implementation using Linked List
+# Task 3: Linked List Stack Class Structure
+# Node class to store data and next reference
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+# LinkedStack class
+class LinkedStack:
+    def __init__(self):
+        self.top = None  # Reference to top node (head of linked list)
+        self.count = 0   # Size counter
+        print("Created new LinkedStack")
+#Task 4
+    def is_empty(self):
+        # Check if stack is empty
+        return self.top is None
+    def push(self, element):
+        new_node = Node(element)
+        new_node.next = self.top
+        self.top = new_node
+        self.count += 1
+        print(f"Pushed {element} to the stack")
+
+    def pop(self):
+        if self.is_empty():
+            print("Stack Underflow! Cannot pop element.")
+            return None
+        popped = self.top.data
+        self.top = self.top.next
+        self.count -= 1
+        print(f"Popped element: {popped}")
+        return popped
+
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty! No top element.")
+            return None
+        return self.top.data
+
+    def is_empty(self):
+        return self.top is None
+
+    def size(self):
+        return self.count
+
+    def display(self):
+        if self.is_empty():
+            print("Stack is empty")
+            return
+        current = self.top
+        elements = []
+        while current:
+            elements.append(str(current.data))
+            current = current.next
+        print("Display stack:", " -> ".join(elements) + " -> null")
+
+# Example usage
+if __name__ == "__main__":
+    linked_stack = LinkedStack()
+    print("Stack is empty:", linked_stack.is_empty())
+
+    linked_stack.push(10)
+    linked_stack.display()
+
+    linked_stack.push(20)
+    linked_stack.display()
+
+    linked_stack.push(30)
+    linked_stack.display()
+
+    print("Top element:", linked_stack.peek())
+
+    linked_stack.pop()
+    linked_stack.display()
+
+    print("Stack size:", linked_stack.size())
